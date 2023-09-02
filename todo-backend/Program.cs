@@ -9,7 +9,6 @@ namespace todo_backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddCors();
             builder.Services.AddInfrastructure(builder.Configuration);
 
             // Add services to the container.
@@ -18,6 +17,11 @@ namespace todo_backend
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            }));
 
             var app = builder.Build();
 
@@ -30,7 +34,7 @@ namespace todo_backend
 
             app.UseHttpsRedirection();
 
-            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseCors("corsapp");
             app.UseAuthorization();
 
 
