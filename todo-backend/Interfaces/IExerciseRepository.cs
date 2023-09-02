@@ -6,6 +6,10 @@ namespace todo_backend.Interfaces
     {
         Task<IEnumerable<Exercise>> GetAllExercises();
 
-        Task<Exercise> CreateExercise();
+        Task<Exercise> CreateExercise(Exercise exercise);
+
+        Task<Exercise> UpdateState(int id);
+
+        Task<Exercise> DeleteExercise(int id);
     }
 }
