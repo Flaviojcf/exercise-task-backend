@@ -9,6 +9,7 @@ namespace todo_backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors();
             builder.Services.AddInfrastructure(builder.Configuration);
 
             // Add services to the container.
@@ -29,6 +30,7 @@ namespace todo_backend
 
             app.UseHttpsRedirection();
 
+            app.UseCors(option => option.AllowAnyOrigin());
             app.UseAuthorization();
 
 
